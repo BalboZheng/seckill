@@ -24,8 +24,6 @@ public class SpringBootStartApplication {
 
     /**
      * 查看 SpringBoot 默认为我们提供的 Bean：
-     * @param ctx
-     * @return
      */
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
