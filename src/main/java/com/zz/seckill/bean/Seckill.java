@@ -7,36 +7,36 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * Serializable：第一个是便于存储，第二个是便于传输？
- */
 public class Seckill implements Serializable {
+    private Long seckillId;
 
-    private long seckillId; //商品ID
-    private String title; //商品标题
-    private String image; //商品图片
-    private BigDecimal price; //商品原价格
-    private BigDecimal costPrice; //商品秒杀价格
+    private String title;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime; //创建时间
+    private String image;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date startTime; //秒杀开始时间
+    private BigDecimal price;
+
+    private BigDecimal costPrice;
+
+    private Long stockCount;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date endTime; //秒杀结束时间
+    private Date startTime;
 
-    private long stockCount; //剩余库存数量
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date endTime;
 
-    public long getSeckillId() {
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
+
+    public Long getSeckillId() {
         return seckillId;
     }
 
-    public void setSeckillId(long seckillId) {
+    public void setSeckillId(Long seckillId) {
         this.seckillId = seckillId;
     }
 
@@ -45,7 +45,7 @@ public class Seckill implements Serializable {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title == null ? null : title.trim();
     }
 
     public String getImage() {
@@ -53,7 +53,7 @@ public class Seckill implements Serializable {
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image = image == null ? null : image.trim();
     }
 
     public BigDecimal getPrice() {
@@ -72,12 +72,12 @@ public class Seckill implements Serializable {
         this.costPrice = costPrice;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Long getStockCount() {
+        return stockCount;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setStockCount(Long stockCount) {
+        this.stockCount = stockCount;
     }
 
     public Date getStartTime() {
@@ -96,11 +96,11 @@ public class Seckill implements Serializable {
         this.endTime = endTime;
     }
 
-    public long getStockCount() {
-        return stockCount;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setStockCount(long stockCount) {
-        this.stockCount = stockCount;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
