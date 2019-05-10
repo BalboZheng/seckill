@@ -22,14 +22,15 @@ public interface SeckillMapper {
 //    int insertSelective(Seckill record);
 //
 //    List<Seckill> selectByExample(SeckillExample example);
-//
-//    Seckill selectByPrimaryKey(Long seckillId);
-//
-//    int updateByExampleSelective(@Param("record") Seckill record, @Param("example") SeckillExample example);
-//
-//    int updateByExample(@Param("record") Seckill record, @Param("example") SeckillExample example);
-//
-//    int updateByPrimaryKeySelective(Seckill record);
+
+    /**
+     * 根据主键查询当前秒杀商品的数据
+     *
+     * @param seckillId
+     * @return
+     */
+    Seckill selectByPrimaryKey(long seckillId);
+
     /**
      * 查询所有秒杀商品的记录信息
      *
@@ -37,13 +38,11 @@ public interface SeckillMapper {
      */
     List<Seckill> findAll();
 
-    /**
-     * 根据主键查询当前秒杀商品的数据
-     *
-     * @param id
-     * @return
-     */
-    Seckill findById(long id);
+//    int updateByExampleSelective(@Param("record") Seckill record, @Param("example") SeckillExample example);
+//
+//    int updateByExample(@Param("record") Seckill record, @Param("example") SeckillExample example);
+//
+//    int updateByPrimaryKeySelective(Seckill record);
 
     /**
      * 减库存。

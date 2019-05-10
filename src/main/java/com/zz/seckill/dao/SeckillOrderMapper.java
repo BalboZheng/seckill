@@ -28,6 +28,10 @@ public interface SeckillOrderMapper {
      */
     int insert(@Param("seckillId") long seckillId, @Param("money") BigDecimal money, @Param("userPhone") long userPhone);
 
+//    int insertSelective(SeckillOrder record);
+//
+//    List<SeckillOrder> selectByExample(SeckillOrderExample example);
+
     /**
      * 根据秒杀商品ID查询订单明细数据并得到对应秒杀商品的数据，因为我们再SeckillOrder中已经定义了一个Seckill的属性
      *
@@ -35,13 +39,8 @@ public interface SeckillOrderMapper {
      * @param userPhone
      * @return
      */
-    SeckillOrder findById(@Param("seckillId") long seckillId, @Param("userPhone") long userPhone);
+    SeckillOrder selectByPrimaryKey(@Param("seckillId") long seckillId, @Param("userPhone") long userPhone);
 
-//    int insertSelective(SeckillOrder record);
-//
-//    List<SeckillOrder> selectByExample(SeckillOrderExample example);
-//
-//    SeckillOrder selectByPrimaryKey(SeckillOrderKey key);
 //
 //    int updateByExampleSelective(@Param("record") SeckillOrder record, @Param("example") SeckillOrderExample example);
 //
