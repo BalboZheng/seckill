@@ -1,0 +1,7 @@
+{
+  "timestamp": "2019-05-09T12:57:15.102+0000",
+  "status": 500,
+  "error": "Internal Server Error",
+  "message": "\r\n### Error updating database.  Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 7\r\n### The error may involve com.zz.seckill.dao.UserMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into t_user      ( userName,password,                phone )       VALUES( ?, ?, ?              ?) )\r\n### Cause: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 7\n; bad SQL grammar []; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 7",
+  "path": "/user/add"
+}

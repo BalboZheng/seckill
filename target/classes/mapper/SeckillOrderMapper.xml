@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zz.seckill.dao.SeckillOrderMapper">
+    <resultMap id="BaseResultMap" type="com.zz.seckill.bean.SeckillOrder">
+        <id column="seckill_id" property="seckillId" jdbcType="BIGINT"/>
+        <id column="user_phone" property="userPhone" jdbcType="BIGINT"/>
+        <result column="money" property="money" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="state" property="state" jdbcType="TINYINT"/>
+    </resultMap>
+    <resultMap id="LinkageResultMap" type="com.zz.seckill.bean.SeckillOrder">
+        <id column="seckill_id" property="seckillId" jdbcType="BIGINT"/>
+        <id column="user_phone" property="userPhone" jdbcType="BIGINT"/>
+        <result column="money" property="money" jdbcType="DECIMAL"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="state" property="state" jdbcType="TINYINT"/>
+        <association property="seckill" javaType="com.zz.seckill.bean.Seckill">
+            <id column="seckill_id" property="seckillId" jdbcType="BIGINT"/>
+            <result column="title" property="title" jdbcType="VARCHAR"/>
+            <result column="image" property="image" jdbcType="VARCHAR"/>
+            <result column="price" property="price" jdbcType="DECIMAL"/>
+            <result column="cost_price" property="costPrice" jdbcType="DECIMAL"/>
+            <result column="stock_count" property="stockCount" jdbcType="BIGINT"/>
+            <result column="start_time" property="startTime" jdbcType="TIMESTAMP"/>
+            <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+            <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        </association>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    seckill_id, user_phone, money, create_time, state
+  </sql>
+    <sql id="linkage_Column_List">
+    so.seckill_id,so.user_phone,so.money,so.create_time,so.state,
+    s.seckill_id "seckill.seckill_id",s.title "seckill.title",s.cost_price "seckill.cost_price",s.create_time "seckill.create_time",
+    s.start_time "seckill.start_time",s.end_time "seckill.end_time",s.stock_count "seckill.stock_count"
+  </sql>
+    <!--      <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zz.seckill.bean.SeckillOrderExample" >-->
+    <!--        select-->
+    <!--        <if test="distinct" >-->
+    <!--          distinct-->
+    <!--        </if>-->
+    <!--        <include refid="Base_Column_List" />-->
+    <!--        from seckill_order-->
+    <!--        <if test="_parameter != null" >-->
+    <!--          <include refid="Example_Where_Clause" />-->
+    <!--        </if>-->
+    <!--        <if test="orderByClause != null" >-->
+    <!--          order by ${orderByClause}-->
+    <!--        </if>-->
+    <!--      </select>-->
+    <select id="selectByPrimaryKey" resultMap="LinkageResultMap" parameterType="com.zz.seckill.bean.SeckillOrderKey">
+        select
+        <include refid="linkage_Column_List"/>
+        from seckill_order so
+        inner join seckill s on so.seckill_id = s.seckill_id
+        where so.eckill_id = #{seckillId,jdbcType=BIGINT}
+        and so.user_phone = #{userPhone,jdbcType=BIGINT}
+    </select>
+    <!--  <delete id="deleteByPrimaryKey" parameterType="com.zz.seckill.bean.SeckillOrderKey" >-->
+    <!--    delete from seckill_order-->
+    <!--    where seckill_id = #{seckillId,jdbcType=BIGINT}-->
+    <!--      and user_phone = #{userPhone,jdbcType=BIGINT}-->
+    <!--  </delete>-->
+    <!--  <delete id="deleteByExample" parameterType="com.zz.seckill.bean.SeckillOrderExample" >-->
+    <!--    delete from seckill_order-->
+    <!--    <if test="_parameter != null" >-->
+    <!--      <include refid="Example_Where_Clause" />-->
+    <!--    </if>-->
+    <!--  </delete>-->
+    <insert id="insert" parameterType="com.zz.seckill.bean.SeckillOrder">
+    insert ignore into seckill_order (seckill_id, user_phone, money)
+    values (#{seckillId,jdbcType=BIGINT}, #{userPhone,jdbcType=BIGINT}, #{money,jdbcType=DECIMAL})
+  </insert>
+    <!--  <insert id="insertSelective" parameterType="com.zz.seckill.bean.SeckillOrder" >-->
+    <!--    insert into seckill_order-->
+    <!--    <trim prefix="(" suffix=")" suffixOverrides="," >-->
+    <!--      <if test="seckillId != null" >-->
+    <!--        seckill_id,-->
+    <!--      </if>-->
+    <!--      <if test="userPhone != null" >-->
+    <!--        user_phone,-->
+    <!--      </if>-->
+    <!--      <if test="money != null" >-->
+    <!--        money,-->
+    <!--      </if>-->
+    <!--      <if test="createTime != null" >-->
+    <!--        create_time,-->
+    <!--      </if>-->
+    <!--      <if test="state != null" >-->
+    <!--        state,-->
+    <!--      </if>-->
+    <!--    </trim>-->
+    <!--    <trim prefix="values (" suffix=")" suffixOverrides="," >-->
+    <!--      <if test="seckillId != null" >-->
+    <!--        #{seckillId,jdbcType=BIGINT},-->
+    <!--      </if>-->
+    <!--      <if test="userPhone != null" >-->
+    <!--        #{userPhone,jdbcType=BIGINT},-->
+    <!--      </if>-->
+    <!--      <if test="money != null" >-->
+    <!--        #{money,jdbcType=DECIMAL},-->
+    <!--      </if>-->
+    <!--      <if test="createTime != null" >-->
+    <!--        #{createTime,jdbcType=TIMESTAMP},-->
+    <!--      </if>-->
+    <!--      <if test="state != null" >-->
+    <!--        #{state,jdbcType=TINYINT},-->
+    <!--      </if>-->
+    <!--    </trim>-->
+    <!--  </insert>-->
+    <!--  <select id="countByExample" parameterType="com.zz.seckill.bean.SeckillOrderExample" resultType="java.lang.Integer" >-->
+    <!--    select count(*) from seckill_order-->
+    <!--    <if test="_parameter != null" >-->
+    <!--      <include refid="Example_Where_Clause" />-->
+    <!--    </if>-->
+    <!--  </select>-->
+    <!--  <update id="updateByExampleSelective" parameterType="map" >-->
+    <!--    update seckill_order-->
+    <!--    <set >-->
+    <!--      <if test="record.seckillId != null" >-->
+    <!--        seckill_id = #{record.seckillId,jdbcType=BIGINT},-->
+    <!--      </if>-->
+    <!--      <if test="record.userPhone != null" >-->
+    <!--        user_phone = #{record.userPhone,jdbcType=BIGINT},-->
+    <!--      </if>-->
+    <!--      <if test="record.money != null" >-->
+    <!--        money = #{record.money,jdbcType=DECIMAL},-->
+    <!--      </if>-->
+    <!--      <if test="record.createTime != null" >-->
+    <!--        create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+    <!--      </if>-->
+    <!--      <if test="record.state != null" >-->
+    <!--        state = #{record.state,jdbcType=TINYINT},-->
+    <!--      </if>-->
+    <!--    </set>-->
+    <!--    <if test="_parameter != null" >-->
+    <!--      <include refid="Update_By_Example_Where_Clause" />-->
+    <!--    </if>-->
+    <!--  </update>-->
+    <!--  <update id="updateByExample" parameterType="map" >-->
+    <!--    update seckill_order-->
+    <!--    set seckill_id = #{record.seckillId,jdbcType=BIGINT},-->
+    <!--      user_phone = #{record.userPhone,jdbcType=BIGINT},-->
+    <!--      money = #{record.money,jdbcType=DECIMAL},-->
+    <!--      create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+    <!--      state = #{record.state,jdbcType=TINYINT}-->
+    <!--    <if test="_parameter != null" >-->
+    <!--      <include refid="Update_By_Example_Where_Clause" />-->
+    <!--    </if>-->
+    <!--  </update>-->
+    <!--  <update id="updateByPrimaryKeySelective" parameterType="com.zz.seckill.bean.SeckillOrder" >-->
+    <!--    update seckill_order-->
+    <!--    <set >-->
+    <!--      <if test="money != null" >-->
+    <!--        money = #{money,jdbcType=DECIMAL},-->
+    <!--      </if>-->
+    <!--      <if test="createTime != null" >-->
+    <!--        create_time = #{createTime,jdbcType=TIMESTAMP},-->
+    <!--      </if>-->
+    <!--      <if test="state != null" >-->
+    <!--        state = #{state,jdbcType=TINYINT},-->
+    <!--      </if>-->
+    <!--    </set>-->
+    <!--    where seckill_id = #{seckillId,jdbcType=BIGINT}-->
+    <!--      and user_phone = #{userPhone,jdbcType=BIGINT}-->
+    <!--  </update>-->
+    <!--  <update id="updateByPrimaryKey" parameterType="com.zz.seckill.bean.SeckillOrder" >-->
+    <!--    update seckill_order-->
+    <!--    set money = #{money,jdbcType=DECIMAL},-->
+    <!--      create_time = #{createTime,jdbcType=TIMESTAMP},-->
+    <!--      state = #{state,jdbcType=TINYINT}-->
+    <!--    where seckill_id = #{seckillId,jdbcType=BIGINT}-->
+    <!--      and user_phone = #{userPhone,jdbcType=BIGINT}-->
+    <!--  </update>-->
+</mapper>

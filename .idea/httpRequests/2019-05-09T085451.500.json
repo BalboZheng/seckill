@@ -1,0 +1,7 @@
+{
+  "timestamp": "2019-05-09T12:54:51.109+0000",
+  "status": 500,
+  "error": "Internal Server Error",
+  "message": "\r\n### Error updating database.  Cause: java.sql.SQLException: Column count doesn't match value count at row 1\r\n### The error may involve com.zz.seckill.dao.UserMapper.insert-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into t_user      ( userName,password )       VALUES( ?, ?, ? )\r\n### Cause: java.sql.SQLException: Column count doesn't match value count at row 1\n; bad SQL grammar []; nested exception is java.sql.SQLException: Column count doesn't match value count at row 1",
+  "path": "/user/add"
+}
