@@ -1,11 +1,8 @@
-package com.zz.seckill.dao;
+package com.zz.seckill.mapper;
 
 import com.zz.seckill.bean.SeckillOrder;
-import com.zz.seckill.bean.SeckillOrderExample;
-import com.zz.seckill.bean.SeckillOrderKey;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

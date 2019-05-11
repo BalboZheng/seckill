@@ -1,7 +1,6 @@
-package com.zz.seckill.dao;
+package com.zz.seckill.mapper;
 
 import com.zz.seckill.bean.Seckill;
-import com.zz.seckill.bean.SeckillExample;
 
 import java.util.Date;
 import java.util.List;
